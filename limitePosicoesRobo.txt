@@ -1,0 +1,70 @@
+					Posições limites do robo:
+
+Limite máximo
+Ombro1: 
+	-90 até 90
+
+Ombro2: 
+	0 até 110
+Cotovelo: 0
+Pulso: 0
+
+
+Limite mínimo:
+	Ombro1: -90 até 90
+Ombro2: 45
+Cotovelo: 112
+Pulso: 22
+//
+
+
+			Pegar posições:
+
+Ombro2: 98
+Cotovelo: -1
+Pulso: 86
+
+
+Ombro2: 98
+Cotovelo: -2
+Pulso: 84
+
+
+Ombro2: 73
+Cotovelo: 50
+Pulso: 57
+
+
+Ombro2: 52
+Cotovelo: 97
+Pulso: 32
+
+
+Ombro2: 48
+Cotovelo: 110
+Pulso: 23
+
+
+Ombro2: 40
+Cotovelo: 138
+Pulso: 3
+
+
+Ombro2: 48
+Cotovelo: 111
+Pulso: 25
+
+
+Ombro2: 49
+Cotovelo: 109
+Pulso: 25
+
+
+Ombro2: 44
+Cotovelo: 114
+Pulso: 21
+
+
+Ombro2: 98
+Cotovelo: -1
+Pulso: 86

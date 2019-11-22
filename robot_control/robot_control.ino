@@ -7,8 +7,8 @@ void setup(){
   Serial.println("start");
   delay(1000);
   
-  homePos();
   printPosition();
+  turnOffRobot();
 }
 
 void loop(){
