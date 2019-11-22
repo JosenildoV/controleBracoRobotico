@@ -49,3 +49,25 @@ void homePos(){
   ax12SetRegister(6,AX_LED,0);
 }
 
+//Levar de posição para grau
+int pos2degree(int pos){
+
+  float deg = (300*(float(pos)/1023.0));
+
+  int degree = (int) (deg - 150);  
+
+  return degree;
+}
+
+// Levar de grau para posição
+int degree2pos(int degree)
+{
+  if (degree<-150)
+    degree = -150;
+  if (degree>150)
+    degree = 150;
+    
+  int pos = (int)(1023*(float(degree+150)/(300.0)));
+  
+  return pos;
+}
