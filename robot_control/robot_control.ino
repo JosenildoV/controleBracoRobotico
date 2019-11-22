@@ -2,11 +2,61 @@
 #include <BioloidController.h>
 
 void setup(){
+  Serial.begin(9600);
+  delay(2000);
+  Serial.println("start");
+  delay(1000);
   
+  homePos();
+  printPosition();
 }
 
 void loop(){
+  //printPosition();
+  //delay(1000);
+}
+
+void sample(){
+  SetPosition(6,degree2pos(0));
+  delay(10000);
+  printPosition();
+  //zerarTorque();
+}
+
+void moveRobot(){
+  //SetPosition(6,degree2pos(0));
+  SetPosition(5,degree2pos(0));
+  SetPosition(4,degree2pos(0));
+  SetPosition(3,degree2pos(110));
+  SetPosition(2,degree2pos(90));
+  delay(8000);   
+}
+
+void catchObjet(){
+  SetPosition(6,degree2pos(-90));
+  delay(5000);
+}
+
+void dropObject(){
+  SetPosition(6,degree2pos(0));
+  delay(5000);
+}
+
+void turnOffRobot(){
+ //'Desligar' o robo
+  ax12SetRegister(1,AX_TORQUE_ENABLE,0);
+  ax12SetRegister(2,AX_TORQUE_ENABLE,0);
+  ax12SetRegister(3,AX_TORQUE_ENABLE,0);
+  ax12SetRegister(4,AX_TORQUE_ENABLE,0);
+  ax12SetRegister(5,AX_TORQUE_ENABLE,0);
+  ax12SetRegister(6,AX_TORQUE_ENABLE,0);
   
+  ax12SetRegister(1,AX_LED,0);
+  ax12SetRegister(2,AX_LED,0);
+  ax12SetRegister(3,AX_LED,0);
+  ax12SetRegister(4,AX_LED,0);
+  ax12SetRegister(5,AX_LED,0);
+  ax12SetRegister(6,AX_LED,0); 
 }
 
 //Função para colocar braço na posição inicial
@@ -72,7 +122,6 @@ int degree2pos(int degree)
   return pos;
 }
 
-
 //Função para imprimir posição atual dos motores do braço
 void printPosition(){
   
@@ -93,3 +142,13 @@ void printPosition(){
   Serial.print("Garra: ");
   Serial.println(pos2degree(pos6));
 }
+
+//Nova função setPosition
+void SetPositionExt(int num_motor, int num_pos){
+  SetPosition(num_motor,degree2pos(num_pos));
+  while(ax12GetRegister(num_motor, 36, 2) < degree2pos(num_pos) -5 || ax12GetRegister(num_motor, 36, 2) > degree2pos(num_pos) +5){ 
+   delay(10);
+  }
+  Serial.println("done.");
+}
+
