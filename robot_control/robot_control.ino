@@ -71,3 +71,25 @@ int degree2pos(int degree)
   
   return pos;
 }
+
+
+//Função para imprimir posição atual dos motores do braço
+void printPosition(){
+  
+  int pos2 = ax12GetRegister(2, 36, 2);
+  int pos3 = ax12GetRegister(3, 36, 2);
+  int pos4 = ax12GetRegister(4, 36, 2);
+  int pos5 = ax12GetRegister(5, 36, 2);
+  int pos6 = ax12GetRegister(6, 36, 2);
+  delay(500);
+  Serial.print("Ombro1: ");
+  Serial.println(pos2degree(pos2));
+  Serial.print("Ombro2: ");
+  Serial.println(pos2degree(pos3));
+  Serial.print("Cotovelo: ");
+  Serial.println(pos2degree(pos4));
+  Serial.print("Pulso: ");
+  Serial.println(pos2degree(pos5));
+  Serial.print("Garra: ");
+  Serial.println(pos2degree(pos6));
+}
