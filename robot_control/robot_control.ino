@@ -6,14 +6,38 @@ void setup(){
   delay(2000);
   Serial.println("start");
   delay(1000);
-  
-  printPosition();
-  turnOffRobot();
+  changeVelocity();
+  //moveRobot();
+  homePos();
 }
 
 void loop(){
+  //moveRobot();
+  //homePos();
   //printPosition();
-  //delay(1000);
+  //turnOffRobot();
+}
+
+void changeVelocity(){
+  //Mudar velocidade
+  ax12SetRegister2(2,AX_TORQUE_LIMIT_L,400);
+  ax12SetRegister2(3,AX_TORQUE_LIMIT_L,400);
+  ax12SetRegister2(4,AX_TORQUE_LIMIT_L,400);
+  ax12SetRegister2(5,AX_TORQUE_LIMIT_L,400);
+  ax12SetRegister2(6,AX_TORQUE_LIMIT_L,400);
+  delay(1000);
+  ax12SetRegister2(2,32,50);
+  ax12SetRegister2(3,32,50);
+  ax12SetRegister2(4,32,50);
+  ax12SetRegister2(5,32,50);
+  ax12SetRegister2(6,32,50);
+  delay(1000);
+  ax12SetRegister2(2,33,80);
+  ax12SetRegister2(3,33,80);
+  ax12SetRegister2(4,33,80);
+  ax12SetRegister2(5,33,80);
+  ax12SetRegister2(6,33,80);
+  delay(1000);
 }
 
 void sample(){
@@ -24,12 +48,67 @@ void sample(){
 }
 
 void moveRobot(){
-  //SetPosition(6,degree2pos(0));
-  SetPosition(5,degree2pos(0));
-  SetPosition(4,degree2pos(0));
-  SetPosition(3,degree2pos(110));
-  SetPosition(2,degree2pos(90));
-  delay(8000);   
+
+  Serial.println("Ordem: 1");
+  SetPositionExt(2,-35);
+  SetPositionExt(3,74);
+  SetPositionExt(4,31);
+  SetPositionExt(5,-13);
+
+  Serial.println("Ordem: 2");
+  SetPositionExt(2,39);
+  SetPositionExt(3,56);
+  SetPositionExt(4,22);
+  SetPositionExt(5,2);
+
+  Serial.println("Ordem: 3");
+  SetPositionExt(2,79);
+  SetPositionExt(3,43);
+  SetPositionExt(4,-25);
+  SetPositionExt(5,20);
+
+  Serial.println("Ordem: 4");
+  SetPositionExt(2,33);
+  SetPositionExt(3,93);
+  SetPositionExt(4,63);
+  SetPositionExt(5,-70);
+
+  Serial.println("Ordem: 5");
+  SetPositionExt(2,47);
+  SetPositionExt(3,64);
+  SetPositionExt(4,0);
+  SetPositionExt(5,18);
+
+  Serial.println("Ordem: 6");
+  SetPositionExt(2,-1);
+  SetPositionExt(3,72);
+  SetPositionExt(4,47);
+  SetPositionExt(5,-51);
+
+  Serial.println("Ordem: 7");
+  SetPositionExt(2,-74);
+  SetPositionExt(3,91);
+  SetPositionExt(4,-29);
+  SetPositionExt(5,62);
+
+  Serial.println("Ordem: 8");
+  SetPositionExt(2,-58);
+  SetPositionExt(3,12);
+  SetPositionExt(4,133);
+  SetPositionExt(5,2);
+
+  Serial.println("Ordem: 9");
+  SetPositionExt(2,90);
+  SetPositionExt(3,95);
+  SetPositionExt(4,-90);
+  SetPositionExt(5,79);
+
+  Serial.println("Ordem: 10");
+  SetPositionExt(2,90);
+  SetPositionExt(3,56);
+  SetPositionExt(4,84);
+  SetPositionExt(5,-83);
+  
 }
 
 void catchObjet(){

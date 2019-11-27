@@ -18,7 +18,7 @@ Pulso: 22
 //
 
 
-			Pegar posições:
+			Pegar posições (pegar objeto):
 
 Ombro2: 98
 Cotovelo: -1
@@ -68,3 +68,11 @@ Pulso: 21
 Ombro2: 98
 Cotovelo: -1
 Pulso: 86
+
+//
+			Pegar posições (levantar):
+
+Ombro2: 110
+Cotovelo: 5
+Pulso: -1
+
