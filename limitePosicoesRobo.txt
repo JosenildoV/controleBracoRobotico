@@ -69,10 +69,3 @@ Ombro2: 98
 Cotovelo: -1
 Pulso: 86
 
-//
-			Pegar posições (levantar):
-
-Ombro2: 110
-Cotovelo: 5
-Pulso: -1
-
