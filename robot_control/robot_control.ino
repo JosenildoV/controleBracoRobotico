@@ -52,6 +52,17 @@ void receiveComandsSerial(){
   }
 }
 
+int serialReceiveNumber(){
+
+  int signal = Serial.read();
+  int pos1 = Serial.read();
+  int pos2 = Serial.read();
+
+  int res = ((pos2 * 256) + pos1) * signal;
+
+  return res;
+}
+
 void receiveComands(){
  
  //numero de bytes disponíveis
