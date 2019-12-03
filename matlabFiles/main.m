@@ -9,10 +9,11 @@ fscanf(s)
 
 a=1;
 while(a<=10)
-    fwrite(s, abs(pos1(a)), 'int8');
-    fwrite(s, abs(pos2(a)), 'int8');
-    fwrite(s, abs(pos3(a)), 'int8');
-    fwrite(s, abs(pos4(a)), 'int8');
+    writePosition(s, pos1(a));
+    writePosition(s, pos2(a));
+    writePosition(s, pos3(a));
+    writePosition(s, pos4(a));
+
     a = a + 1;
     
     fscanf(s)
