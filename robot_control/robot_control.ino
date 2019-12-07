@@ -10,11 +10,12 @@
 void setup(){ 
   Serial.begin(9600);
   delay(3000);
-  Serial.println("start");
+  //Serial.println("start");
 }
 
 void loop(){
   receiveComandsSerial();
+  
 }
 
 void receiveComandsSerial(){  
@@ -24,21 +25,22 @@ void receiveComandsSerial(){
     int motor5 = 0;
 
 //  Serial.print(Serial.available());
-  if (Serial.available()>=4)
+  if (Serial.available()>=2)
   {
     Serial.print(Serial.available());
-    motor2 = Serial.read();
-    motor3 = Serial.read();
-    motor4 = Serial.read();
-    motor5 = Serial.read();
+    motor2 = serialReceiveNumber();
+    //motor3 = serialReceiveNumber();
+    //motor4 = serialReceiveNumber();
+    //motor5 = serialReceiveNumber();
     
-    //SetPositionMulti(motor2,motor3,motor4,motor5,0);
+    changeVelocity();
+    SetPositionMulti(motor2,0,0,0,0);
     
     //changeVelocity();
-    SetPosition(2,degree2pos(motor2));
-    SetPosition(3,degree2pos(motor3));
-    SetPosition(4,degree2pos(motor4));
-    SetPosition(5,degree2pos(motor5));
+    //SetPosition(ombro1,degree2pos(motor2));
+    //SetPosition(ombro2,degree2pos(motor3));
+    //SetPosition(cotovelo,degree2pos(motor4));
+    //SetPosition(pulso,degree2pos(motor5));
     //SetPosition(6,512);
     
     Serial.print(" | ");
@@ -58,46 +60,22 @@ int serialReceiveNumber(){
   int pos1 = Serial.read();
   int pos2 = Serial.read();
 
-  int res = ((pos2 * 256) + pos1) * signal;
+  int res = 0;
+  
+  if(signal){
+    res = ((pos2 * 256) + pos1) * (-1);
+  }else{
+    res = ((pos2 * 256) + pos1); 
+  }
 
   return res;
 }
 
-void receiveComands(){
- 
- //numero de bytes disponíveis
-  if(Serial.available() > 7){//no minimo 2 bytes * 3 servos
-    //primeiro para a posição inicial e depois executar o movimento.
-    //homePos();
-    
-    //para não ter conflito com var id
-    int i;
-    
-    //cada byte da comunicação, lida byte a byte
-    int low = 0;
-    int high = 0;
-      
-    for(i = 2; i <= 5; i++){
-      //manter ordem    
-      low = Serial.read();
-      high = Serial.read();
-  
-      Serial.print(low);
-      Serial.print(" ");
-      Serial.println(high);
-      delay(300);
-      //Definir posicao
-      SetPositionExt(i, low + high*256 );//low + high*256);
-      delay(300);
-    }
-    
-    //garantir que no serial não irá ter nada mais
-    Serial.flush(); 
-  }
-}
-
 void samplePosition(){
-  SetPositionMulti(-7,47,27,49, 0);
+  SetPositionMulti(10,40,-45,60, 0);
+  SetPositionMulti(-7,26,13,-5, 0);
+  SetPositionMulti(-60,50,-30,10, 0);
+  
 }
 
 void positionZeroRobot(){
@@ -116,20 +94,20 @@ void changeVelocity(){
   //Mudar velocidade
 
   //torque
-  ax12SetRegister2(ombro1,14,100);
+  ax12SetRegister2(ombro1,14,200);
   ax12SetRegister2(ombro2,14,800);
   ax12SetRegister2(cotovelo,14,700);
   ax12SetRegister2(pulso,14,400);
   ax12SetRegister2(garra,14,500);
   
   //velocidade
-  ax12SetRegister2(ombro1,32,80);
-  ax12SetRegister2(ombro2,32,80);
-  ax12SetRegister2(cotovelo,32,80);
-  ax12SetRegister2(pulso,32,80);
-  ax12SetRegister2(garra,32,80);
+  ax12SetRegister2(ombro1,32,50);
+  ax12SetRegister2(ombro2,32,50);
+  ax12SetRegister2(cotovelo,32,50);
+  ax12SetRegister2(pulso,32,50);
+  ax12SetRegister2(garra,32,50);
   
-  ax12SetRegister2(ombro1,33,0);
+  ax12SetRegister2(ombro1,33,80);
   ax12SetRegister2(ombro2,33,0);
   ax12SetRegister2(cotovelo,33,0);
   ax12SetRegister2(pulso,33,0);
@@ -158,7 +136,7 @@ void homePos(){
   changeVelocity();
   
   //Mudar posição para inicial (ou home)
-  SetPositionMulti(0, 140, -140, -55, 0);
+  SetPositionMulti(0, 142, -140, -55, 0);
   
   //'Desligar' o robo
   turnOffRobot();
@@ -208,14 +186,14 @@ void SetPositionExt(int num_motor, float num_pos){
   while(curPos < num_pos -2 || curPos > num_pos +2){ 
    delay(150);
    if(GetPositionExt(num_motor) > curPos -1 && GetPositionExt(num_motor) < curPos +1){
-       Serial.println("halt!");
+       //Serial.println("halt!");
        SetPosition(num_motor, GetPosition(num_motor));
-       printPosition();
+       //printPosition();
        break;
      }
      curPos = GetPositionExt(num_motor);
   }
-  Serial.println("done.");
+  //Serial.println("done.");
 }
 
 // move todos os braços de uma vez, espera todos chegarem à posição esperada antes de continuar
@@ -230,22 +208,22 @@ void SetPositionMulti(float num_pos1, float num_pos2, float num_pos3, float num_
   
   while(((GetPositionExt(ombro1) < num_pos1 -5 || GetPositionExt(ombro1) > num_pos1 +5) || (GetPositionExt(ombro2) < num_pos2 -5 || GetPositionExt(ombro2) > num_pos2 +5) || (GetPositionExt(cotovelo) < num_pos3 -5 || GetPositionExt(cotovelo) > num_pos3 +5) || (GetPositionExt(pulso) < num_pos4 -5 || GetPositionExt(pulso) > num_pos4 +5) || (GetPositionExt(garra) < num_pos5 -5 || GetPositionExt(garra) > num_pos5 +5)) && i<50){ 
      
-    Serial.print((GetPositionExt(ombro1) < num_pos1 -5 || GetPositionExt(ombro1) > num_pos1 +5));
-    Serial.print((GetPositionExt(ombro2) < num_pos2 -5 || GetPositionExt(ombro2) > num_pos2 +5));
-    Serial.print((GetPositionExt(cotovelo) < num_pos3 -5 || GetPositionExt(cotovelo) > num_pos3 +5));
-    Serial.print((GetPositionExt(pulso) < num_pos4 -5 || GetPositionExt(pulso) > num_pos4 +5));
-    Serial.println((GetPositionExt(garra) < num_pos5 -5 || GetPositionExt(garra) > num_pos5 +5));
+    //Serial.print((GetPositionExt(ombro1) < num_pos1 -5 || GetPositionExt(ombro1) > num_pos1 +5));
+    //Serial.print((GetPositionExt(ombro2) < num_pos2 -5 || GetPositionExt(ombro2) > num_pos2 +5));
+    //Serial.print((GetPositionExt(cotovelo) < num_pos3 -5 || GetPositionExt(cotovelo) > num_pos3 +5));
+    //Serial.print((GetPositionExt(pulso) < num_pos4 -5 || GetPositionExt(pulso) > num_pos4 +5));
+    //Serial.println((GetPositionExt(garra) < num_pos5 -5 || GetPositionExt(garra) > num_pos5 +5));
     delay(100);
     i++;
   }
 
   if(i>=50){
-    Serial.println("Entrou outro loop!!!!");
+    //Serial.println("Entrou outro loop!!!!");
     SetPositionMulti(num_pos1,num_pos2,num_pos3,num_pos4,num_pos5);
     return;
   }
 
-  Serial.println("done.");
+  //Serial.println("done.");
   delay(300);
-  printPosition();
+  //printPosition();
 }
