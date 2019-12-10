@@ -115,6 +115,10 @@ void receiveComandsSerial()
        printPosition(); // printar posições
        Serial.read(); 
     }
+    if(Serial.peek() == 'i'){
+       catchColorPos(); // setar posições para pegar imagem da co
+       Serial.read(); 
+    }
     
     //Serial.read();
   }
@@ -143,6 +147,11 @@ void zeroPos()
 {
   SetPositionMulti(0, 0, 0, 0);
   SetPositionExt(garra, 0);
+}
+
+void catchColorPos()
+{
+  SetPositionMulti(0, 65, 64, 15);
 }
 
 void luz(int num)
