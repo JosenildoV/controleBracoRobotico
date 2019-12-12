@@ -1001,13 +1001,13 @@ data = ...
 1000 30 60 -17 -29 -128.341305 -125.326630 782.520283] 
 
 subplot(4,1,1)
-plot(1:1000,data(:,2))
+plot(1:length(motor2),normal(motor2))
 subplot(4,1,2)
-plot(1:1000,data(:,3))
+plot(1:length(motor3),normal(motor3))
 subplot(4,1,3)
-plot(1:1000,data(:,4))
+plot(1:length(motor4),normal(motor4))
 subplot(4,1,4)
-plot(1:1000,data(:,5))
+plot(1:length(motor5),normal(motor5))
 
 plot(1:1000,data(:,2),1:1000,data(:,3),1:1000,data(:,4),1:1000,data(:,5)), legend('motor1','motor2','motor3','motor4')
 %plot(1:1000,data(:,6),1:1000,data(:,7),1:1000,-data(:,8)), legend('x','y','z')
@@ -1015,10 +1015,10 @@ plot(1:1000,data(:,2),1:1000,data(:,3),1:1000,data(:,4),1:1000,data(:,5)), legen
 plot(1:1000,log(data(:,6)),1:1000,log(data(:,7)),1:1000,log(data(:,8))), legend('x','y','z')
 
 subplot(3,1,1)
-plot(1:1000,data(:,6))
+plot(1:length(saidaX),normal(saidaX))
 subplot(3,1,2)
-plot(1:1000,data(:,7))
+plot(1:length(saidaY),normal(saidaY))
 subplot(3,1,3)
-plot(1:1000,-data(:,8))
+plot(1:length(saidaZ),normal(saidaZ))
 
 plot(1:1000,data(:,6),1:1000,data(:,7),1:1000,-data(:,8)), legend('x','y','z')

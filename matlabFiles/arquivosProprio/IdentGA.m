@@ -7,34 +7,27 @@ clc;
 clear all;
 warning off;
 
-load('motor2.csv');
-load('motor3.csv');
-load('motor4.csv');
-load('motor5.csv');
-load('saidaX.csv');
-load('saidaY.csv');
-load('saidaZ.csv');
+load dados.mat;
 
 global entrada saida tout
-T_stop = 962;
-tout = [(1:T_stop)', (1:T_stop)', (1:T_stop)', (1:T_stop)'];
+T_stop = 96.1;
+tout = 0:.1:T_stop;
 
 %entrada e saida esperados
 entrada = [motor2, motor3, motor4, motor5];
 saida = [saidaX, saidaY, saidaZ];
 
 %Par?metros do GA
-lb = [0 0 0 0 0 0 0];    %Limite inferior de x
-ub = [1 1 1 1 1 1 1];       %Limite superior de x
+lb = zeros(1,21);    %Limite inferior de x
+ub = ones(1,21);       %Limite superior de x
 D = length(ub);
 
 options = optimoptions('ga',...
 'CrossoverFraction', 0.7,...
 'Display', 'off', ...
-'FunctionTolerance', 1e-6,...
-'MaxGenerations', 50*D,...
+'FunctionTolerance', 1e-3,...
+'MaxGenerations', 1*D,...
 'PopulationSize', 30);
-
 
 % xi = linspace(-6,2,300);
 % yi = linspace(-4,4,300);
@@ -42,11 +35,10 @@ options = optimoptions('ga',...
 % Z = ps_example([X(:),Y(:)]);
 
 %GA
-[x,erro,~,output] = ga(@ident_problem,D,[],[],[],[],lb,ub,[],options); %ga(@ps_example,D,[],[],[],[],lb,ub,[],options); 
+[x,erro,~,output] = ga(@ident_problem,D,[],[],[],[],lb,ub,[],options);
+%ga(@ps_example,D,[],[],[],[],lb,ub,[],options); 
 
-%Fun??o de transfer?ncia da planta
-syst = tf(x(1),[x(2) x(3) x(4)]);
-y = lsim(syst,entrada,tout);
+disp(x);
 
 figure
 plot(tout,saida,'black',tout,y,'red')
