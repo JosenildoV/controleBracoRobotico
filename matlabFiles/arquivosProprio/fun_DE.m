@@ -2,7 +2,7 @@
 %                      Evolucao Diferencial                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function [x, fitness, list_Offspring_fitness] = fun_DE(Param)
+function [x, fitness, list_Offspring_fitness, list_Offspring_fitness_best, list_Offitness_best] = fun_DE(Param, entradaTreinamento, saidaTreinamento, tout)
 
 %Parâmetros do algoritmo
 Ger = Param.Num_Gen ;             %Total de Gerações
@@ -19,7 +19,7 @@ x = bsxfun(@plus,lbound,bsxfun(@times,ubound-lbound,rand(NP,D)));
 
 %Avaliação dos individuos
 for i=1:NP
-    erro = ident_problem(x(i,:));
+    erro = ident_problem(x(i,:),entradaTreinamento, saidaTreinamento, tout);
     fitness(i,1) = erro;
 end
 
@@ -33,7 +33,7 @@ while Ger>0 && min(fitness)>1e-5
     Offspring = DE(x(MatingPool,:),Param);
     %Avaliar Filhos
     for i=1:NP
-        erro = ident_problem(Offspring(i,:));
+        erro = ident_problem(Offspring(i,:),entradaTreinamento, saidaTreinamento, tout);
         Offspring_fitness(i,1) = erro;
     end
     
@@ -45,6 +45,8 @@ while Ger>0 && min(fitness)>1e-5
         end
     end
     list_Offspring_fitness(index)= mean(Offspring_fitness);
+    list_Offspring_fitness_best(index) = min(Offspring_fitness);
+    list_Offitness_best(index) = min(fitness);
     index = index+ 1;
 end
 

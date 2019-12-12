@@ -1,6 +1,6 @@
-function erro = ident_problem(x)
+function erro = ident_problem(x, entradaTreinamento, saidaTreinamento, tout)
 
-global saida entrada tout
+% global entradaTreinamento saidaTreinamento tout
 
 C = eye(3);
 
@@ -16,12 +16,12 @@ B = [x(10) x(11) x(12) x(13)
 syst = ss(A,B,C,0);
 %disp(syst.InputGroup);
 a=0;
-while(a<length(entrada))
+while(a<length(entradaTreinamento))
 %     disp(a);
     a=a+1;
-    ent = entrada(a,:);
+    ent = entradaTreinamento(a,:);
     ysim = lsim(syst, repmat(ent,length(tout),1), tout);
-    dif(a) = sqrt(sum((ysim(length(tout),:) - saida(a,:)) .^2));
+    dif(a) = sqrt(sum((ysim(length(tout),:) - saidaTreinamento(a,:)) .^2));
 end
 
 erro = mean(dif);

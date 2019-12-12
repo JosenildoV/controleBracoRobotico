@@ -14,7 +14,7 @@ void setup()
   Serial.begin(9600);
     changeVelocity();
     delay(100);
-  //Serial.read();
+  Serial.read();
   Serial.println("start");
 }
 
