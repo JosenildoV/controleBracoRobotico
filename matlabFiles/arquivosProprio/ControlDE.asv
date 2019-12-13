@@ -105,27 +105,8 @@ for i=1:length(Ar_ger)
                 
                 figure1 = figure;
                 plot(mean(indiv_total,2));
-                saveas(figure1,['figura_indiv_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-                plot(mean(fitness_total,2));
-                saveas(figure1,['figura_fitness_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-                plot(mean(generationFitness_total,2));
-                saveas(figure1,['figura_generationFitness_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-                plot(mean(generationFitness_best_total,2));
-                saveas(figure1,['figura_generationFitness_best_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-                plot(mean(fitness_bestByGeneration_total,2));
-                saveas(figure1,['figura_fitness_bestByGeneration_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
+                saveas(figure1,[]);
 
-                plot(mean(log(indiv_total),2));
-                saveas(figure1,['figura_indiv_log_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-                plot(mean(log(fitness_total),2));
-                saveas(figure1,['figura_fitness_log_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-                plot(mean(log(generationFitness_total),2));
-                saveas(figure1,['figura_generationFitness_log_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-                plot(mean(log(generationFitness_best_total),2));
-                saveas(figure1,['figura_generationFitness_best_log_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-                plot(mean(log(fitness_bestByGeneration_total),2));
-                saveas(figure1,['figura_fitness_bestByGeneration_log_' int2str(Param.Num_Gen) '_' int2str(Param.Num_Ind) '_' num2str(Param.F) '_' num2str(Param.CR) '.png']);
-		
             end
         end
     end
