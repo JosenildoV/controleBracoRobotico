@@ -17,12 +17,12 @@ tout = 0:.1:T_stop;
 entrada = [motor2, motor3, motor4, motor5];
 saida = [saidaX, saidaY, saidaZ];
 
-Ar_ger = [50];% 100 150 200];
-Ar_ind = [30];% 50 100];
-Ar_cru = [0.6];
+Ar_ger = [200];
+Ar_ind = [100];
+Ar_cru = [0.8];
 Ar_mut = [0.1];
 
-aux = length(entrada)/10;
+aux = length(entrada)/12;
 
 for i=1:length(Ar_ger)
     for j=1:length(Ar_ind)
@@ -37,7 +37,7 @@ for i=1:length(Ar_ger)
                 Param.Num_Ind = Ar_ind(j); % indivíduos
                 Param.F = Ar_cru(k);
                 Param.CR = Ar_mut(l);
-                Param.StopT = 10;
+                Param.StopT = 100;
 
                 disp('Algoritmo DE para Ajuste de PID')
 
@@ -48,7 +48,7 @@ for i=1:length(Ar_ger)
                 generationFitness_best_total = [];
                 fitness_bestByGeneration_total = [];
                 
-                parfor m=1:10
+                parfor m=1:12
                     disp(['loop num: ' int2str(m)]);
                     
                     %vetor booleano para separar entrada e sainda em teste e treinamento
