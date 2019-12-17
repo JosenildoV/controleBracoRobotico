@@ -1,6 +1,8 @@
 %Algoritmo de teste
 
-% load('melhorIndividuo.mat')
+load('melhorIndividuo.mat')
+load('entradaSaida.mat')
+load('dados.mat')
 
 T_stop = 100;
 tout = 0:.1:T_stop;
@@ -31,5 +33,18 @@ for i = 1:length(entrada)
 end
 saidaEstimadaInvert = saidaEstimada';
 comp = [saida saidaEstimadaInvert difTest'];
-mean(difTest')
+
+saidaEstimadaX = saidaEstimadaInvert(:,1);
+saidaEstimadaY = saidaEstimadaInvert(:,2);
+saidaEstimadaZ = saidaEstimadaInvert(:,3);
+
+erroX = saidaX - saidaEstimadaX;
+erroY = saidaY - saidaEstimadaY;
+erroZ = saidaZ - saidaEstimadaZ;
+
+diffMotor2 = motor2 - motor2(constt);
+diffMotor3 = motor3 - motor3(constt);
+diffMotor4 = motor4 - motor4(constt);
+diffMotor5 = motor5 - motor5(constt);
+
 % saveas(saidaEstimadaInvert,['comp' '.txt']);
