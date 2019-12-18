@@ -3,7 +3,7 @@ clear
 close all
 
 step=2e-4;
-Ref =1;
+Ref =4;
 gu= 100;
 ge = 50;
 gde = 20;
