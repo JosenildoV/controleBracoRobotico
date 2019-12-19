@@ -119,6 +119,10 @@ void receiveComandsSerial()
        catchColorPos(); // setar posições para pegar imagem da co
        Serial.read(); 
     }
+    if(Serial.peek() == 'u'){
+       SetPositionMulti(45,58,81,0);
+      Serial.read(); 
+    }
     
     //Serial.read();
   }

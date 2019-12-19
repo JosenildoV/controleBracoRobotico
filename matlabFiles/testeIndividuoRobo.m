@@ -36,7 +36,7 @@ load('stereoParams.mat');
 fwrite(s, 'S');
 disp(fscanf(s));
 
-%Comando para ir à posicao para pegar a cor
+%Comando para ir ï¿½ posicao para pegar a cor
 fwrite(s,'i','uchar');
 pause(5);
 
@@ -54,7 +54,7 @@ pause(5);
  disp(fscanf(s));
 
 pause(2);
-for a = 1:20
+for a = 1:1
     %Parte de triangulacao de distancia pelas cameras
      stat1 = detectLABColor(cam1, LAB);
      stat2 = detectLABColor(cam2, LAB);
